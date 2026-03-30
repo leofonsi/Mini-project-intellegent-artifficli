@@ -1,0 +1,67 @@
+# Mini-projet ML - Heart Disease Prediction
+
+## Problème traité
+Construire un système intelligent de prédiction de la présence d'une maladie cardiaque à partir de variables cliniques simples.
+
+## Dataset utilisé
+- **Nom** : Cleveland Heart Disease dataset
+- **Source** : UCI Machine Learning Repository (version souvent reprise sur Kaggle)
+- **Taille** : 303 observations, 13 variables explicatives et 1 cible d'origine (`num`)
+- **Transformation de la cible** :
+  - `0` -> absence de maladie cardiaque
+  - `1` -> présence de maladie cardiaque (`num > 0`)
+
+## Prétraitement
+- imputation des valeurs manquantes (`ca`, `thal`)
+- standardisation des variables numériques
+- encodage one-hot des variables catégorielles
+- split train/test stratifié
+
+## Modèles testés
+- Logistic Regression
+- k-NN
+- Random Forest
+- SVM RBF
+
+## Résultats principaux
+
+| Modèle | Accuracy | F1 | Precision | Recall | ROC-AUC |
+|---|---:|---:|---:|---:|---:|
+| k-NN | 0.9016 | 0.9000 | 0.8438 | 0.9643 | 0.9643 |
+| SVM RBF | 0.8852 | 0.8852 | 0.8182 | 0.9643 | 0.9610 |
+| Random Forest | 0.8852 | 0.8814 | 0.8387 | 0.9286 | 0.9470 |
+| Logistic Regression | 0.8689 | 0.8667 | 0.8125 | 0.9286 | 0.9665 |
+
+**Meilleur modèle sur ce split** : **k-NN**
+- Accuracy test : **0.9016**
+- F1 test : **0.9000**
+- ROC-AUC test : **0.9643**
+
+## Comment exécuter le projet
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python src/train.py
+python src/predict.py --input data/raw/sample_input.json
+streamlit run app/streamlit_app.py
+```
+
+## Structure
+```text
+heart_disease_project/
+├── app/streamlit_app.py
+├── data/raw/heart_cleveland.csv
+├── models/best_model.joblib
+├── notebooks/heart_disease_end_to_end.ipynb
+├── outputs/
+├── reports/rapport_projet_heart_disease.pdf
+├── src/train.py
+├── src/predict.py
+├── video/demo_script.md
+├── requirements.txt
+└── README.md
+```
+
+## Remarque
+Projet pédagogique : ne pas utiliser comme outil médical réel.
